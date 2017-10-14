@@ -3,35 +3,53 @@
  * Oct 14, 2017
  *
  * based on Google's Speech Synthesis API
- * https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API */
+ * https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
+ *
+ * and p5.js-speech library
+ * http://ability.nyu.edu/p5.js-speech/
+ */
 
-// Initilize speech synthizer and get voices
-var synth = window.speechSynthesis;
-var voices = window.speechSynthesis.getVoices();
 
-// Initialize singers array and create them
+// Initialize singers array
 var singers = [];
-for (let i = 0; i < 4; i++) {
-	singers[i] = new SpeechSynthesisUtterance();
+
+// DOM variables
+var inputText, speakButton, labels;
+
+
+function setup(){
+	// create the singers
+	for (let i = 0; i < 4; i++) {
+		singers[i] = new p5.Speech();
+	}
+
+	// DOM ELEMENTS
+	// input dialog
+	inputText = createInput("I'm so sexy");
+	inputText.style("width", 400);
+  inputText.position(20, 65);
+
+	// button:
+	speakButton = createButton('Sing!');
+	speakButton.position(20, 100);
+	speakButton.mousePressed(doSpeak);
+
+	// labels for instructions
+	labels = createDiv("Make me sing!");
+	labels.position(20, 40);
+
+	// canvas for visuals
+	createCanvas(800, 800);
+
+	// first words
+	singers[0].speak(inputText.value());
 }
 
-// create singers and give them a voice! and personality
-for (let i = 0; i < 4; i++) {
-	// choose the singer's voice
-	let voiceIndex = Math.floor( Math.random()*64 );
-	singers[i].voice = voices[voiceIndex];
-	// give singers personality
-	// singers[i].volume = 1;
-	// singers[i].rate = 1;
-	// singers[i].pitch = 1;
+function draw(){
+	background(0);
 }
 
-// prototype text for singers
-for (let i = 0; i < singers.length; i++) {
-	singers[i].text = "Hello";
-}
-
-// let the singers SING!!!!!
-for (let i = 0; i < singers.length; i++) {
-	speechSynthesis.speak(singers[i]);
-}
+function doSpeak()
+	{
+		singers[0].speak(inputText.value()); // debug printer for voice options
+	}
