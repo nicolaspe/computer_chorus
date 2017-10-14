@@ -11,17 +11,15 @@
 
 
 // Initialize singers array
-var singers = [];
+var soloSinger;
+var chorusSingers = [];
 
 // DOM variables
 var inputText, speakButton, listButton, labels;
 
 
 function setup(){
-	// create the singers
-	for (let i = 0; i < 4; i++) {
-		singers[i] = new p5.Speech();
-	}
+	soloSinger = new p5.Speech();
 
 	// DOM ELEMENTS
 	// input dialog
@@ -34,9 +32,9 @@ function setup(){
 	speakButton.position(20, 100);
 	speakButton.mousePressed(doSpeak);
 
-	listButton = createButton('List Voices');
+	listButton = createButton('Create Computer Chorus');
   listButton.position(20, 140);
-  listButton.mousePressed(doList);
+  listButton.mousePressed(createChorus);
 
 	// labels for instructions
 	labels = createDiv("Make me sing!");
@@ -46,7 +44,7 @@ function setup(){
 	createCanvas(800, 800);
 
 	// first words
-	singers[0].speak(inputText.value());
+	soloSinger.speak(inputText.value());
 }
 
 function draw(){
@@ -54,9 +52,13 @@ function draw(){
 }
 
 function doSpeak(){
-	singers[0].speak(inputText.value()); // debug printer for voice options
+	soloSinger[0].speak(inputText.value()); // debug printer for voice options
 }
 
-function doList(){
-	singers[0].listVoices(); // debug printer for voice options
+function createChorus(){
+	// create the computer chorus singers
+	for (let i = 0; i < 4; i++) {
+		chorusSingers[i] = new p5.Speech();
+	}
+	chorusSingers[0].listVoices(); // debug printer for voice options
 }
