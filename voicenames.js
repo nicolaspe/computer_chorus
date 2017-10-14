@@ -1,1 +1,1 @@
-var voiceNames = [ "Good News",    "Trinoids",  "Ding" "Bad News", "Bells" ]; 
+var voiceNames = [ "Good News", "Trinoids", "Veena", "Ding", "Bad News", "Bells"]; 
