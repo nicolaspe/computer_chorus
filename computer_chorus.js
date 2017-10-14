@@ -14,7 +14,7 @@
 var singers = [];
 
 // DOM variables
-var inputText, speakButton, labels;
+var inputText, speakButton, listButton, labels;
 
 
 function setup(){
@@ -29,10 +29,14 @@ function setup(){
 	inputText.style("width", 400);
   inputText.position(20, 65);
 
-	// button:
+	// buttons:
 	speakButton = createButton('Sing!');
 	speakButton.position(20, 100);
 	speakButton.mousePressed(doSpeak);
+
+	listButton = createButton('List Voices');
+  listButton.position(20, 140);
+  listButton.mousePressed(doList);
 
 	// labels for instructions
 	labels = createDiv("Make me sing!");
@@ -49,7 +53,10 @@ function draw(){
 	background(0);
 }
 
-function doSpeak()
-	{
-		singers[0].speak(inputText.value()); // debug printer for voice options
-	}
+function doSpeak(){
+	singers[0].speak(inputText.value()); // debug printer for voice options
+}
+
+function doList(){
+	singers[0].listVoices(); // debug printer for voice options
+}
