@@ -11,15 +11,14 @@
 
 
 // Initialize singers array
-var soloSinger;
-var chorusSingers = [];
+var soloSinger = new p5.Speech();
+var chorusSingers = new p5.Speech();
+var chorusCreated = false;
 
 // DOM variables
-var inputText, speakButton, listButton, labels;
-
+var inputText, speakButton, listButton, singerButton, labels;
 
 function setup(){
-	soloSinger = new p5.Speech();
 
 	// DOM ELEMENTS
 	// input dialog
@@ -32,8 +31,8 @@ function setup(){
 	speakButton.position(20, 100);
 	speakButton.mousePressed(doSpeak);
 
-	listButton = createButton('Create Computer Chorus');
-  listButton.position(20, 140);
+	listButton = createButton('Computer Responder');
+  listButton.position(20, 130);
   listButton.mousePressed(createChorus);
 
 	// labels for instructions
@@ -42,23 +41,33 @@ function setup(){
 
 	// canvas for visuals
 	createCanvas(800, 800);
+	colorMode(HSB, 360, 100, 100);
 
 	// first words
+	soloSinger.setPitch(random(0.2, 0.6));
+	soloSinger.setRate(random(1.1, 2.1));
 	soloSinger.speak(inputText.value());
 }
 
 function draw(){
-	background(0);
+	background(272, 65, 90);
 }
 
 function doSpeak(){
-	soloSinger[0].speak(inputText.value()); // debug printer for voice options
+	soloSinger.speak(inputText.value()); // debug printer for voice options
+	if(chorusCreated){
+		let response = Math.floor(random(sexyWords.length));
+		chorusSingers.speak(sexyWords[response]);
+	}
 }
 
 function createChorus(){
 	// create the computer chorus singers
-	for (let i = 0; i < 4; i++) {
-		chorusSingers[i] = new p5.Speech();
-	}
-	chorusSingers[0].listVoices(); // debug printer for voice options
+	let voiceIndex = Math.floor(random(voiceNames.length));
+	let pitchValue = random(1.2,2);
+	chorusSingers.listVoices();
+	chorusSingers.setVoice(voiceNames[voiceIndex]);
+	chorusSingers.setRate(random(1.1, 2.1));
+	chorusSingers.setPitch(voiceIndex);
+	chorusCreated = true;
 }
