@@ -1,1 +1,1 @@
-var voiceNames = ["Agnes", "Amelie", "Anna", "Ellen", "Fiona", "Good News", "Bruce", "Daniel", "Karen", "Yelda", "Veena", "Trinoids", "Zuzana", "Satu", "Ralph", "Ralph", "Xander", "Thomas", "Google UK English Male"]; 
+var voiceNames = [ "Good News",    "Trinoids",  "Ding" "Bad News", "Bells" ]; 
