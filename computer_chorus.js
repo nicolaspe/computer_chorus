@@ -14,7 +14,7 @@
 var soloSinger = new p5.Speech();
 var chorusSingers = new p5.Speech();
 var chorusCreated = false;
-var text;
+// var sungText = [];
 
 // DOM variables
 var inputText, speakButton, listButton, singerButton, labels;
@@ -47,7 +47,6 @@ function setup(){
 	// canvas for visuals
 	createCanvas(710, 400);
 	colorMode(HSB, 360, 100, 100);
-	// text = [];
 
 	// visual initializations
 	xspacing = 16;    // Distance between each horizontal location
@@ -63,12 +62,15 @@ function setup(){
 	soloSinger.setPitch(random(0.2, 0.6));
 	soloSinger.setRate(random(1.1, 2.1));
 	soloSinger.speak(inputText.value());
+
+	// sungText.push(inputText.value());
+	// printText();
 }
 
 function draw(){
 	background(272, 65, 90);
-	calcWave();
-	renderWave();
+	// calcWave();
+	// renderWave();
 	ellipse(width/2, height/2, 100, 100);
 }
 
@@ -92,7 +94,7 @@ function createChorus(){
 
 // function printText(){
 // 	for (let j = 0; j < text.length; j++) {
-// 		text[j];
+// 		sungText[j];
 // 	}
 // }
 
