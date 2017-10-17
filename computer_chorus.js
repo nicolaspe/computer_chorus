@@ -37,9 +37,9 @@ function setup(){
 	speakButton.position(20, 100);
 	speakButton.mousePressed(doSpeak);
 
-	listButton = createButton('Computer Responder');
-  listButton.position(20, 130);
-  listButton.mousePressed(createChorus);
+	// listButton = createButton('Computer Responder');
+  // listButton.position(20, 130);
+  // listButton.mousePressed(createChorus);
 
 	// labels for instructions
 	labels = createDiv("Make me sing!");
@@ -87,7 +87,15 @@ function draw(){
 }
 
 function doSpeak(){
+	// if there's no chorus, create it
+	if(!chorusCreated){
+		createChorus();
+	}
+
+	// initialize singer visual
 	exciteSinger();
+
+	// add text to sing
 	sungText.push(inputText.value());
 	soloSinger.speak(inputText.value());
 
@@ -106,6 +114,7 @@ function createChorus(){
 	chorusSingers.setVoice(voiceNames[voiceIndex]);
 	chorusSingers.setRate(random(1.1, 2.1));
 	chorusSingers.setPitch(voiceIndex);
+
 	chorusCreated = true;
 }
 
