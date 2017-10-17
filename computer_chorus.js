@@ -11,8 +11,8 @@
 
 
 // Initialize singers array
-var soloSinger = new p5.Speech();
-var chorusSingers = new p5.Speech();
+var soloSinger;
+var chorusSingers;
 var chorusCreated = false;
 var sungText = [];
 var textSepatation = 40;
@@ -61,15 +61,18 @@ function setup(){
 	chorusAmplitude = 20;
 	chorusValues = new Array(floor(w/xspacing));
 
-	// start and end funcitons
-	soloSinger.onStart = exciteSinger();
-	soloSinger.onEnd = calmSinger();
-	chorusSingers.onStart = exciteChorus();
-	chorusSingers.onEnd   = calmChorus();
-
-	// first words
+	// setup singers and start and end funcitons
+	soloSinger = new p5.Speech();
 	soloSinger.setPitch(random(0.2, 0.6));
 	soloSinger.setRate(random(1.1, 2.1));
+	soloSinger.onStart = exciteSinger;
+	soloSinger.onEnd = calmSinger;
+
+	chorusSingers = new p5.Speech();
+	chorusSingers.onStart = exciteChorus;
+	chorusSingers.onEnd = calmChorus;
+
+	// first words
 	sungText.push(inputText.value());
 	soloSinger.speak(inputText.value());
 
@@ -84,6 +87,7 @@ function draw(){
 }
 
 function doSpeak(){
+	exciteSinger();
 	sungText.push(inputText.value());
 	soloSinger.speak(inputText.value());
 
@@ -145,29 +149,34 @@ function renderWave() {
   // Draw singer wave
 	fill(272+10,50,100);
 	for (let i = 0; i < singerValues.length; i++) {
-    ellipse(i*xspacing, height*.7 +singerValues[i], 12, 12);
+    ellipse(i*xspacing, height*.7 +singerValues[i], 10, 10);
   }
 
 	// Draw chorus wave
 	fill(272-10,100,50);
 	for (let i = 0; i < chorusValues.length; i++) {
-		ellipse(i*xspacing, height*.7 +chorusValues[i], 12, 12);
+		ellipse(i*xspacing, height*.7 +chorusValues[i], 10, 10);
 	}
 }
 
 function exciteSinger(){
 	singerAmplitude = 70;
-	singerTheta = 0.10;
+	singerTheta = 0.50;
+	console.log("excite singer");
 }
 function calmSinger(){
 	singerAmplitude = 20;
 	singerTheta = 0.02;
+	console.log("calm singer");
 }
 function exciteChorus(){
+	calmSinger();
 	chorusAmplitude = 70;
-	chorusTheta = 0.10;
+	chorusTheta = 0.50;
+	console.log("excite chorus");
 }
 function calmChorus(){
 	chorusAmplitude = 20;
 	chorusTheta = 0.02;
+	console.log("calm chorus");
 }
