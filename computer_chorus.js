@@ -61,7 +61,7 @@ function setup(){
 	chorusAmplitude = 20;
 	chorusValues = new Array(floor(w/xspacing));
 
-	// setup singers and start and end funcitons
+	// setup singers and start and end functions
 	soloSinger = new p5.Speech();
 	soloSinger.setPitch(random(0.2, 0.6));
 	soloSinger.setRate(random(1.1, 2.1));
